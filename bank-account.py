@@ -9,15 +9,28 @@ class BankAccount:
         self.account_number = account_number
         self.balance = 0
 
-    def deposit(amount):
+    def deposit(self, amount):
         self.balance += amount
     
-    def withdraw(amount):
+    def withdraw(self, amount):
         self.balance -= amount
 
-    def get_balance():
+    def get_balance(self):
         print(f"Hi {self.full_name}, balance is: {self.balance:.2f}")
     
     def add_interest(monthly_interest_rate = 0.00083):
         interest = balance * monthly_interest_rate
         balance += interest
+
+    def print_statement(self):
+        print(f"{self.full_name}")
+        print(f"Account No.: ****{self.account_number[4:len(self.account_number)]}")
+        print(f"Balance: {self.balance}")
+
+# mark_account = BankAccount(full_name, account_number)
+# homer_account = BankAccount(full_name, account_number)
+mitchell_account = BankAccount("Mitchell Mitcherson", "03141592")
+
+mitchell_account.print_statement()
+
+
