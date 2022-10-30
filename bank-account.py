@@ -14,15 +14,17 @@ class BankAccount:
     and account number as required parameters, and a pre-assigned starting balance of 0
     Input params -  full_name (string) - Full name of account owner
                     account_number (string) - Account number associated with the account
+                    account_type (string) - Account type, either checking or savings & defaults to checking
     Output - none until methods are called
     """
-    def __init__(self, full_name, account_number):
+    def __init__(self, full_name, account_number, account_type = 'checking'):
         """
         Class initialization
         """
         self.full_name = full_name
         self.account_number = account_number
         self.balance = 0
+        self.account_type = account_type
 
     def deposit(self, amount):
         """
@@ -65,15 +67,19 @@ class BankAccount:
         print()
         return self.balance
     
-    def add_interest(self, monthly_interest_rate = 0.00083):
+    def add_interest(self):
         """
-        add_interest method is used to add interest to a balance at a predetermined interest rate.
-        Required input - monthly_interest_rate (float), assigned default value of 0.00083 (0.083%).
+        add_interest method is used to add interest to a balance at a predetermined interest rate for account type.
+        Required input - account_type (string) - determines the monthly interest (0.083% for checking, 0.1% for savings).
         Output - string to indicate the interest accrued after one month.
         """
+        if self.account_type == "savings":
+            monthly_interest_rate = 0.001
+        else:
+            monthly_interest_rate = 0.00083
         interest = self.balance * monthly_interest_rate
         self.balance += interest
-        print(f"The interest you've accrued for this statement period is: ${interest:.2f}")
+        print(f"The interest you've accrued for this statement period in your {self.account_type} account is: ${interest:.2f}")
         print()
 
     def print_statement(self):
@@ -87,7 +93,9 @@ class BankAccount:
         print(f"Balance: ${self.balance:.2f}")
         print()
 
-# allow customization of account number length, must be an int
+# allow customization of account number length, must be an int. 
+# Written so that it could take user input if desired but currently uses a preassigned value
+
 account_number_length = 8
 def generate_account_number(account_number_length):
     """
@@ -104,15 +112,16 @@ def generate_account_number(account_number_length):
 
 # Instantiating required test bank accounts with account number as a randomly generated 8 digit string
 
-mark_account = BankAccount("Mark Rattle", generate_account_number(account_number_length))
-homer_account = BankAccount("Homer Simpson", generate_account_number(account_number_length))
-mitchell_account = BankAccount("Mitchell Mitcherson", generate_account_number(account_number_length))
+mark_account = BankAccount("Mark Rattle", generate_account_number(account_number_length),"checking")
+homer_account = BankAccount("Homer Simpson", generate_account_number(account_number_length),"savings")
+mitchell_account = BankAccount("Mitchell Mitcherson", generate_account_number(account_number_length),"checking")
 
 # Clear the terminal and run the required code to show class function
 
 os.system('clear')
 print(randint(0,9))
 
+# print (mark_account.__dict__)
 # Mitchell Mitcherson's account
 mitchell_account.get_balance()
 mitchell_account.deposit(400000)
@@ -137,7 +146,7 @@ print("="*20)
 
 # Homer Simpson's account
 homer_account.get_balance()
-homer_account.deposit(60407)
+homer_account.deposit(1200)
 homer_account.print_statement()
 homer_account.add_interest()
 homer_account.print_statement()
@@ -146,11 +155,13 @@ homer_account.withdraw(20)
 homer_account.print_statement()
 print("="*20)
 
-
-
 # Run program in a loop after showing the demo outputs
 
-# program_loop = True
+program_loop = True
 
 # while program_loop == True:
-#     print
+#     print ("Welcome to Mark's bank!")
+#     print ("Please select an account:")
+#     print ("""
+
+# """)
