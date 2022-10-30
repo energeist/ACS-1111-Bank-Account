@@ -71,8 +71,10 @@ class BankAccount:
         """
         add_interest method is used to add interest to a balance at a predetermined interest rate for account type.
         Required input - account_type (string) - determines the monthly interest (0.083% for checking, 0.1% for savings).
-        Output - string to indicate the interest accrued after one month.
+        Output - returns the interest accrued for the month and prints a string to confirm.
         """
+        print(f"{self.full_name}, your pre-interest balance is: ${self.balance:.2f}")
+        print()
         if self.account_type == "savings":
             monthly_interest_rate = 0.001
         else:
@@ -81,6 +83,7 @@ class BankAccount:
         self.balance += interest
         print(f"The interest you've accrued for this statement period in your {self.account_type} account is: ${interest:.2f}")
         print()
+        return interest
 
     def print_statement(self):
         """
@@ -110,28 +113,20 @@ def generate_account_number(account_number_length):
         i += 1
     return account_number
 
-# Instantiating required test bank accounts with account number as a randomly generated 8 digit string
+# Define an empty list called "bank" to append new accounts to
+bank = []
 
+# Instantiating required test bank accounts with account number as a randomly generated 8 digit string
 mark_account = BankAccount("Mark Rattle", generate_account_number(account_number_length),"checking")
+bank.append(mark_account)
 homer_account = BankAccount("Homer Simpson", generate_account_number(account_number_length),"savings")
+bank.append(homer_account)
 mitchell_account = BankAccount("Mitchell Mitcherson", generate_account_number(account_number_length),"checking")
+bank.append(mitchell_account)
 
 # Clear the terminal and run the required code to show class function
 
 os.system('clear')
-print(randint(0,9))
-
-# print (mark_account.__dict__)
-# Mitchell Mitcherson's account
-mitchell_account.get_balance()
-mitchell_account.deposit(400000)
-mitchell_account.print_statement()
-mitchell_account.add_interest()
-mitchell_account.print_statement()
-# Mitch needs to buy some Yeezys
-mitchell_account.withdraw(150)
-mitchell_account.print_statement()
-print("="*20)
 
 # Mark Rattle's account
 mark_account.get_balance()
@@ -155,6 +150,26 @@ homer_account.withdraw(20)
 homer_account.print_statement()
 print("="*20)
 
+# Mitchell Mitcherson's account
+mitchell_account.get_balance()
+mitchell_account.deposit(400000)
+mitchell_account.print_statement()
+mitchell_account.add_interest()
+mitchell_account.print_statement()
+# Mitch needs to buy some Yeezys
+mitchell_account.withdraw(150)
+mitchell_account.print_statement()
+print("="*20)
+
+# Add one month of interest for each account in the bank list and print a new statement
+
+for account in bank:
+    print(f"Adding one month of interest to {account.full_name}'s {account.account_type} account...")
+    print()
+    account.add_interest()
+    account.print_statement()
+    print("=" * 20)
+
 # Run program in a loop after showing the demo outputs
 
 program_loop = True
@@ -163,5 +178,4 @@ program_loop = True
 #     print ("Welcome to Mark's bank!")
 #     print ("Please select an account:")
 #     print ("""
-
 # """)
