@@ -1,5 +1,7 @@
 #import os module for terminal clearing
 import os
+#import randint for random numbers
+from random import randint
 
 """
 ACS-1111 Bank Account assignment
@@ -61,6 +63,7 @@ class BankAccount:
         """
         print(f"Hi {self.full_name}, your current balance is: ${self.balance:.2f}")
         print()
+        return self.balance
     
     def add_interest(self, monthly_interest_rate = 0.00083):
         """
@@ -84,15 +87,31 @@ class BankAccount:
         print(f"Balance: ${self.balance:.2f}")
         print()
 
-# Instantiating required test bank accounts
+# allow customization of account number length, must be an int
+account_number_length = 8
+def generate_account_number(account_number_length):
+    """
+    generate_account_number function is used to randomly generate an account number of length account_number_length.
+    Required input - account_number_length (int) - number of digits in the account number
+    Output - returns an account_number as a string
+    """
+    i = 0
+    account_number = ''
+    while i < account_number_length:
+        account_number += str(randint(0,9))
+        i += 1
+    return account_number
 
-mark_account = BankAccount("Mark Rattle", "08675309")
-homer_account = BankAccount("Homer Simpson", "13371337")
-mitchell_account = BankAccount("Mitchell Mitcherson", "03141592")
+# Instantiating required test bank accounts with account number as a randomly generated 8 digit string
+
+mark_account = BankAccount("Mark Rattle", generate_account_number(account_number_length))
+homer_account = BankAccount("Homer Simpson", generate_account_number(account_number_length))
+mitchell_account = BankAccount("Mitchell Mitcherson", generate_account_number(account_number_length))
 
 # Clear the terminal and run the required code to show class function
 
 os.system('clear')
+print(randint(0,9))
 
 # Mitchell Mitcherson's account
 mitchell_account.get_balance()
@@ -126,3 +145,12 @@ homer_account.print_statement()
 homer_account.withdraw(20)
 homer_account.print_statement()
 print("="*20)
+
+
+
+# Run program in a loop after showing the demo outputs
+
+# program_loop = True
+
+# while program_loop == True:
+#     print
