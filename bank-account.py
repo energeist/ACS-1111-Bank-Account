@@ -8,11 +8,15 @@ This code is written in Python and will simulate actions of a bank account
 
 class BankAccount: 
     """
-    docstring
+    BankAccount class is called to instantiate new BankAccount objects that initialize with a full name,
+    and account number as required parameters, and a pre-assigned starting balance of 0
+    Input params -  full_name (string) - Full name of account owner
+                    account_number (string) - Account number associated with the account
+    Output - none until methods are called
     """
     def __init__(self, full_name, account_number):
         """
-        docstring
+        Class initialization
         """
         self.full_name = full_name
         self.account_number = account_number
@@ -20,7 +24,9 @@ class BankAccount:
 
     def deposit(self, amount):
         """
-        docstring
+        Deposit method is used to deposit money into a user's account
+        Input - amount (float), amount to be deposited. Must be > 0.
+        Output - updates balance and prints strings to confirm a deposit
         """
         if amount >= 0:
             self.balance += amount
@@ -31,7 +37,9 @@ class BankAccount:
     
     def withdraw(self, amount):
         """ 
-        docstring
+        Withdraw method is used to withdraw money into a user's account.  Charges a NSF of $10 if there is insufficient balance
+        Input - amount (float), amount to be withdrawn. Must be > 0.
+        Output - updates balance and prints strings to confirm a withdrawal or insufficient balance
         """
         if amount >= 0:
             if amount <= self.balance:
@@ -47,28 +55,36 @@ class BankAccount:
 
     def get_balance(self):
         """
-        docstring
+        Get_balance method is used to display a friendly greeting and the current balance of an account.
+        Required input - none (self only)
+        Output - string to greet full_name & self.balance.
         """
-        print(f"Hi {self.full_name}, your current balance is: {self.balance:.2f}")
+        print(f"Hi {self.full_name}, your current balance is: ${self.balance:.2f}")
         print()
     
     def add_interest(self, monthly_interest_rate = 0.00083):
         """
-        docstring
+        add_interest method is used to add interest to a balance at a predetermined interest rate.
+        Required input - monthly_interest_rate (float), assigned default value of 0.00083 (0.083%).
+        Output - string to indicate the interest accrued after one month.
         """
         interest = self.balance * monthly_interest_rate
         self.balance += interest
+        print(f"The interest you've accrued for this statement period is: ${interest:.2f}")
+        print()
 
     def print_statement(self):
         """
-        docstring
+        print_statement method is used to print a full statement of current account information.
+        Required input - None (self only)
+        Output - string with name, account number and balance of the current account
         """
         print(f"{self.full_name}")
         print(f"Account No.: ****{self.account_number[4:len(self.account_number)]}")
-        print(f"Balance: {self.balance:.2f}")
+        print(f"Balance: ${self.balance:.2f}")
         print()
 
-# Instantiating required bank accounts
+# Instantiating required test bank accounts
 
 mark_account = BankAccount("Mark Rattle", "08675309")
 homer_account = BankAccount("Homer Simpson", "13371337")
@@ -87,6 +103,7 @@ mitchell_account.print_statement()
 # Mitch needs to buy some Yeezys
 mitchell_account.withdraw(150)
 mitchell_account.print_statement()
+print("="*20)
 
 # Mark Rattle's account
 mark_account.get_balance()
@@ -97,6 +114,7 @@ mark_account.print_statement()
 # Mark needs to buy a new Keychron Q2 Barebones kit
 mark_account.withdraw(170)
 mark_account.print_statement()
+print("="*20)
 
 # Homer Simpson's account
 homer_account.get_balance()
@@ -107,3 +125,4 @@ homer_account.print_statement()
 # Homer needs to buy some donuts and Duff beer
 homer_account.withdraw(20)
 homer_account.print_statement()
+print("="*20)
