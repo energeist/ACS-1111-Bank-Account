@@ -8,5 +8,5 @@ Functionality includes:
 - Making a deposit for which the amount is validated
 - Making a withdrawal for which the amount is validated, and charges NSF if the user does not have enough money in their account
 - Accruing monthly interest at a rate according to account type: 
-- 1. 0.1% monthly for a savings account
-- 2. 0.083% monthly for a checking account
+    1. 0.1% monthly for a savings account
+    2. 0.083% monthly for a checking account
