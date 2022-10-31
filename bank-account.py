@@ -2,6 +2,8 @@
 import os
 #import randint for random numbers
 from random import randint
+#import re for regular expression matching
+import re
 
 """
 ACS-1111 Bank Account assignment
@@ -190,8 +192,20 @@ demonstration()
 # Run program in a loop after showing the demo output
 program_loop = True
 
-# while program_loop == True:
+while program_loop == True:
+    i = 0
+    account_choice = ""
+    account_choice_list = []
+    print ("Please select an account:")
+    for account in bank:
+        i += 1
+        account_choice_list.append(str(i))
+        print (f"Account {i} - {account.full_name}")
+    account_choice = input("Enter your choice as a number from the list above > ")
+    while account_choice not in account_choice_list:
+        account_choice = input("Invalid entry, please enter a number from the list above > ")
+        while not re.match("[0-9]", account_choice):
+            account_choice = input("Invalid entry, please enter a number from the list above > ")
+    print(":)")    
 
-#     print ("Please select an account:")
-#     print ("""
-# """)
+
