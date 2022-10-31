@@ -52,9 +52,9 @@ class BankAccount:
                 self.balance -= amount
                 print(f"Amount withdrawn: ${amount:.2f}. New balance: ${self.balance:.2f}")
             else:
-                print(f"Insufficient funds.  The maximum that you can withdraw is ${self.balance:.2f}")
+                print(f"\33[31mInsufficient funds\33[0m.  The maximum that you can withdraw is ${self.balance:.2f}")
                 self.balance -= 10
-                print(f"You have been charged an overdraft fee of $10.00. Your current remaining value is: ${self.balance:.2f}")                
+                print(f"\33[31mYou have been charged an overdraft fee of $10.00\33[0m. Your current remaining value is: ${self.balance:.2f}")                
         else:
             print(f"Invalid withdrawal amount. Must enter a value greater than 0.")
         print()
@@ -115,6 +115,18 @@ def generate_account_number(account_number_length):
         i += 1
     return account_number
 
+def get_amount_input():
+    """
+    get_amount_input function is used to get and verify an amount of money for deposit/withdrawal.
+    Required input - None
+    Output - returns a validated amount as a float
+    """
+    amount = input("Please enter your amount (greater than 0)> ")
+    while not re.match("[0-9\.]", amount):
+        amount = input("Invalid entry, please enter a valid amount of money (float only, > 0, no '$') > ")
+    amount = float(amount)
+    return amount 
+
 # Define an empty list called "bank" to append new accounts to
 bank = []
 
@@ -137,7 +149,7 @@ def demonstration ():
     os.system('clear')
 
 # Mark Rattle's account
-    print("Demo for Mark Rattle's account:")
+    print("\33[33mDemo for Mark Rattle's account:\33[0m")
     print()
     mark_account.get_balance()
     mark_account.deposit(1200)
@@ -175,7 +187,8 @@ def demonstration ():
     mitchell_account.print_statement()
     print("="*20)
 
-# Add one month of interest for each account in the bank list and print a new statement
+# Add one month of interest for each account in the bank list and print a new statement,
+# then reinitialize balances to zero to run the rest of the program from default
 
     for account in bank:
         print(f"Adding one month of interest to {account.full_name}'s {account.account_type} account...")
@@ -183,11 +196,15 @@ def demonstration ():
         account.add_interest()
         account.print_statement()
         print("=" * 20)
+        account.balance = 0
 
 os.system('clear')
 print ("Welcome to Mark's Bank!")
-input("The demonstration showing required code will now run. \33[32mPlease press ENTER to continue.\33[0m")
+print("The demonstration showing required code will now run. Balances will be reset to zero after the demo code runs.")
+input("\33[32mPlease press ENTER to continue.\33[0m")
 demonstration()
+
+# Reinitialize balances to $0.00 after demo
 
 # Run program in a loop after showing the demo output
 program_loop = True
@@ -195,17 +212,55 @@ program_loop = True
 while program_loop == True:
     i = 0
     account_choice = ""
-    account_choice_list = []
-    print ("Please select an account:")
+    account_choice_list = ['x']
+    print("Please select an account:")
     for account in bank:
         i += 1
         account_choice_list.append(str(i))
-        print (f"Account {i} - {account.full_name}")
-    account_choice = input("Enter your choice as a number from the list above > ")
+        print(f"Account {i} - {account.full_name}")
+    print()
+    account_choice = input("Enter your choice as a number from the list above, or 'x' to exit > ")
     while account_choice not in account_choice_list:
         account_choice = input("Invalid entry, please enter a number from the list above > ")
-        while not re.match("[0-9]", account_choice):
-            account_choice = input("Invalid entry, please enter a number from the list above > ")
-    print(":)")    
+        while not re.match("[0-9x]", account_choice):
+            account_choice = input("Invalid entry, please enter a number from the list above > ") 
+    if account_choice == 'x':
+        program_loop = False
+        print("Goodbye!")
+        break
+    print()
+    account_choice = int(account_choice) - 1
+    # print()
+    user_action_loop = True
+    while user_action_loop == True:
+        print("""
+What would you like to do? Select from the following options:
+1 - Make a deposit
+2 - Make a withdrawal (\33[31mWARNING: NSF CHARGE OF $10 APPLIES FOR INVALID TRANSACTIONS\33[0m)
+3 - Accumulate monthly interest
+4 - View your banking statement
+x - Exit to main menu and select another user
+""")
 
-
+        action_choice = input("Enter your choice as a number from the list above, or 'x' to exit > ")
+        while action_choice not in ['1','2','3','4','x']:
+            action_choice = input("Invalid entry, please enter a number from the list above > ")
+            while not re.match("[0-9x]", action_choice):
+                action_choice = input("Invalid entry, please enter a number from the list above > ") 
+        if account_choice == 'x':
+            user_action_loop = False
+            print("Goodbye!")
+            break
+        if action_choice == '1':
+            bank[account_choice].deposit(get_amount_input())
+        elif action_choice == '2':
+            bank[account_choice].withdraw(get_amount_input())
+        elif action_choice == '3':
+            bank[account_choice].add_interest()
+        elif action_choice == '4':
+            bank[account_choice].print_statement()
+        else:
+            print(f"Exiting {bank[account_choice].full_name}'s account and return to main menu...")
+            print()
+            user_action_loop = False
+            
