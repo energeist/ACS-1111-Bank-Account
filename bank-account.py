@@ -124,58 +124,74 @@ bank.append(homer_account)
 mitchell_account = BankAccount("Mitchell Mitcherson", generate_account_number(account_number_length),"checking")
 bank.append(mitchell_account)
 
+def demonstration ():
+    """
+    demonstration function is used to print out pre.
+    Required input - account_number_length (int) - number of digits in the account number
+    Output - returns an account_number as a string
+    """
 # Clear the terminal and run the required code to show class function
 
-os.system('clear')
+    os.system('clear')
 
 # Mark Rattle's account
-mark_account.get_balance()
-mark_account.deposit(1200)
-mark_account.print_statement()
-mark_account.add_interest()
-mark_account.print_statement()
-# Mark needs to buy a new Keychron Q2 Barebones kit
-mark_account.withdraw(170)
-mark_account.print_statement()
-print("="*20)
+    print("Demo for Mark Rattle's account:")
+    print()
+    mark_account.get_balance()
+    mark_account.deposit(1200)
+    mark_account.print_statement()
+    mark_account.add_interest()
+    mark_account.print_statement()
+    # Mark needs to buy a new Keychron Q2 Barebones kit
+    mark_account.withdraw(170)
+    mark_account.print_statement()
+    print("="*20)
 
 # Homer Simpson's account
-homer_account.get_balance()
-homer_account.deposit(1200)
-homer_account.print_statement()
-homer_account.add_interest()
-homer_account.print_statement()
-# Homer needs to buy some donuts and Duff beer
-homer_account.withdraw(20)
-homer_account.print_statement()
-print("="*20)
+    print("Demo for Homer Simpson's account:")
+    print()
+    homer_account.get_balance()
+    homer_account.deposit(1200)
+    homer_account.print_statement()
+    homer_account.add_interest()
+    homer_account.print_statement()
+    # Homer needs to buy some donuts and Duff beer
+    homer_account.withdraw(20)
+    homer_account.print_statement()
+    print("="*20)
 
 # Mitchell Mitcherson's account
-mitchell_account.get_balance()
-mitchell_account.deposit(400000)
-mitchell_account.print_statement()
-mitchell_account.add_interest()
-mitchell_account.print_statement()
-# Mitch needs to buy some Yeezys
-mitchell_account.withdraw(150)
-mitchell_account.print_statement()
-print("="*20)
+    print("Demo for Mitchell Mitcherson's account:")
+    print()
+    mitchell_account.get_balance()
+    mitchell_account.deposit(400000)
+    mitchell_account.print_statement()
+    mitchell_account.add_interest()
+    mitchell_account.print_statement()
+    # Mitch needs to buy some Yeezys
+    mitchell_account.withdraw(150)
+    mitchell_account.print_statement()
+    print("="*20)
 
 # Add one month of interest for each account in the bank list and print a new statement
 
-for account in bank:
-    print(f"Adding one month of interest to {account.full_name}'s {account.account_type} account...")
-    print()
-    account.add_interest()
-    account.print_statement()
-    print("=" * 20)
+    for account in bank:
+        print(f"Adding one month of interest to {account.full_name}'s {account.account_type} account...")
+        print()
+        account.add_interest()
+        account.print_statement()
+        print("=" * 20)
 
-# Run program in a loop after showing the demo outputs
+os.system('clear')
+print ("Welcome to Mark's Bank!")
+input("The demonstration showing required code will now run. \33[32mPlease press ENTER to continue.\33[0m")
+demonstration()
 
+# Run program in a loop after showing the demo output
 program_loop = True
 
 # while program_loop == True:
-#     print ("Welcome to Mark's bank!")
+
 #     print ("Please select an account:")
 #     print ("""
 # """)
