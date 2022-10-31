@@ -145,7 +145,6 @@ def demonstration ():
     Output - returns an account_number as a string
     """
 # Clear the terminal and run the required code to show class function
-
     os.system('clear')
 
 # Mark Rattle's account
@@ -162,7 +161,7 @@ def demonstration ():
     print("="*20)
 
 # Homer Simpson's account
-    print("Demo for Homer Simpson's account:")
+    print("\33[33mDemo for Homer Simpson's account:\33[0m")
     print()
     homer_account.get_balance()
     homer_account.deposit(1200)
@@ -175,7 +174,7 @@ def demonstration ():
     print("="*20)
 
 # Mitchell Mitcherson's account
-    print("Demo for Mitchell Mitcherson's account:")
+    print("\33[33mDemo for Mitchell Mitcherson's account:\33[0m")
     print()
     mitchell_account.get_balance()
     mitchell_account.deposit(400000)
@@ -189,7 +188,6 @@ def demonstration ():
 
 # Add one month of interest for each account in the bank list and print a new statement,
 # then reinitialize balances to zero to run the rest of the program from default
-
     for account in bank:
         print(f"Adding one month of interest to {account.full_name}'s {account.account_type} account...")
         print()
@@ -204,9 +202,8 @@ print("The demonstration showing required code will now run. Balances will be re
 input("\33[32mPlease press ENTER to continue.\33[0m")
 demonstration()
 
-# Reinitialize balances to $0.00 after demo
-
 # Run program in a loop after showing the demo output
+
 program_loop = True
 
 while program_loop == True:
@@ -241,7 +238,6 @@ What would you like to do? Select from the following options:
 4 - View your banking statement
 x - Exit to main menu and select another user
 """)
-
         action_choice = input("Enter your choice as a number from the list above, or 'x' to exit > ")
         while action_choice not in ['1','2','3','4','x']:
             action_choice = input("Invalid entry, please enter a number from the list above > ")
@@ -263,4 +259,5 @@ x - Exit to main menu and select another user
             print(f"Exiting {bank[account_choice].full_name}'s account and return to main menu...")
             print()
             user_action_loop = False
+            
             
