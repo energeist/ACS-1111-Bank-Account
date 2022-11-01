@@ -19,14 +19,16 @@ class BankAccount:
                     account_type (string) - Account type, either checking or savings & defaults to checking
     Output - none until methods are called
     """
-    def __init__(self, full_name, account_number, account_type = 'checking'):
+    def __init__(self, full_name, routing_number, account_number, account_type = 'checking'):
         """
         Class initialization
         """
         self.full_name = full_name
         self.account_number = account_number
+        self.routing_number = routing_number
         self.balance = 0
         self.account_type = account_type
+        # account_type is assigned 'checking' by default, unless another type is assigned during instantiation
 
     def deposit(self, amount):
         """
@@ -98,7 +100,7 @@ class BankAccount:
         Output - string with name, account number and balance of the current account
         """
         print(f"{self.full_name}")
-        print(f"Account No.: ****{self.account_number[4:len(self.account_number)]}")
+        print(f"Account No.: {self.routing_number}-****{self.account_number[4:len(self.account_number)]}")
         print(f"Balance: ${self.balance:.2f}")
         print()
 
@@ -134,12 +136,14 @@ def get_amount_input():
 # Define an empty list called "bank" to append new accounts to
 bank = []
 
-# Instantiating required test bank accounts with account number as a randomly generated 8 digit string
-mark_account = BankAccount("Mark Rattle", generate_account_number(account_number_length),"checking")
+# Instantiating required test bank accounts with account number as a randomly generated 8 digit string. Routing number is predefined since we all bank at the same branch!
+
+routing_number = "12345-003"
+mark_account = BankAccount("Mark Rattle", routing_number, generate_account_number(account_number_length),"checking")
 bank.append(mark_account)
-homer_account = BankAccount("Homer Simpson", generate_account_number(account_number_length),"savings")
+homer_account = BankAccount("Homer Simpson", routing_number, generate_account_number(account_number_length),"savings")
 bank.append(homer_account)
-mitchell_account = BankAccount("Mitchell Mitcherson", generate_account_number(account_number_length),"checking")
+mitchell_account = BankAccount("Mitchell Mitcherson", routing_number, generate_account_number(account_number_length),"checking")
 bank.append(mitchell_account)
 
 def demonstration ():

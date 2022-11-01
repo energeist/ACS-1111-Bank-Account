@@ -4,7 +4,7 @@ Written in Python (version 3.10)
 ## Project Description
 This project is a simple app written to simulate banking actions on a set of pre-defined accounts.
 Functionality includes:
-- Randomized account numbers upon BankAccount object instantiation
+- Randomized account numbers upon BankAccount object instantiation.  Uses a fix routing number which is identical for all accounts (becasue we all bank at the same branch!)
 - Greeting the user
 - Making a deposit for which the amount is validated
 - Making a withdrawal for which the amount is validated, and charges NSF if the user does not have enough money in their account
