@@ -200,15 +200,18 @@ def demonstration ():
         print("=" * 20)
         account.balance = 0
 
-os.system('clear')
-print ("Welcome to Mark's Bank!")
+# RUN THE DEMO CONTENT: 
+
+print()
 print("The demonstration showing required code will now run. Balances will be reset to zero after the demo code runs.")
 input("\33[32mPlease press ENTER to continue.\33[0m")
 demonstration()
 print()
 
-# Run program in a loop after showing the demo output
+# MAIN USER CONTROLLED PROGRAM LOOP STARTS HERE:
 
+print ("Welcome to Mark's Bank!")
+print()
 program_loop = True
 
 while program_loop == True:
@@ -233,11 +236,10 @@ while program_loop == True:
         break
     print()
     account_choice = int(account_choice) - 1
-    # print()
     user_action_loop = True
     while user_action_loop == True:
         print("""What would you like to do? Select from the following options:
-        
+
 1 - Make a deposit
 2 - Make a withdrawal (\33[31mWARNING: NSF CHARGE OF $10 APPLIES FOR INVALID TRANSACTIONS\33[0m)
 3 - Accumulate monthly interest
@@ -246,7 +248,7 @@ x - Exit to main menu and select another user
 """)
         action_choice = input("Enter your choice as a number from the list above, or 'x' to exit > ")
         while action_choice not in ['1','2','3','4','x']:
-            action_choice = input("Invalid entry, please enter a number from the list above > ")
+            action_choice = input("Invalid entry, please enter a number froxm the list above > ")
             while not re.match("[0-9x]", action_choice):
                 action_choice = input("Invalid entry, please enter a number from the list above > ") 
         if account_choice == 'x':
