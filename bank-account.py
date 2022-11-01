@@ -36,6 +36,7 @@ class BankAccount:
         """
         if amount >= 0:
             self.balance += amount
+            print()
             print(f"Amount deposited: ${amount:.2f}. New balance: ${self.balance:.2f}")
         else:
             print(f"Invalid deposit amount. Must enter a value greater than 0.")
@@ -50,8 +51,10 @@ class BankAccount:
         if amount >= 0:
             if amount <= self.balance:
                 self.balance -= amount
+                print()
                 print(f"Amount withdrawn: ${amount:.2f}. New balance: ${self.balance:.2f}")
             else:
+                print()
                 print(f"\33[31mInsufficient funds\33[0m.  The maximum that you can withdraw is ${self.balance:.2f}")
                 self.balance -= 10
                 print(f"\33[31mYou have been charged an overdraft fee of $10.00\33[0m. Your current remaining value is: ${self.balance:.2f}")                
@@ -83,6 +86,7 @@ class BankAccount:
             monthly_interest_rate = 0.00083
         interest = self.balance * monthly_interest_rate
         self.balance += interest
+        print()
         print(f"The interest you've accrued for this statement period in your {self.account_type} account is: ${interest:.2f}")
         print()
         return interest
@@ -201,6 +205,7 @@ print ("Welcome to Mark's Bank!")
 print("The demonstration showing required code will now run. Balances will be reset to zero after the demo code runs.")
 input("\33[32mPlease press ENTER to continue.\33[0m")
 demonstration()
+print()
 
 # Run program in a loop after showing the demo output
 
@@ -211,6 +216,7 @@ while program_loop == True:
     account_choice = ""
     account_choice_list = ['x']
     print("Please select an account:")
+    print()
     for account in bank:
         i += 1
         account_choice_list.append(str(i))
@@ -230,8 +236,8 @@ while program_loop == True:
     # print()
     user_action_loop = True
     while user_action_loop == True:
-        print("""
-What would you like to do? Select from the following options:
+        print("""What would you like to do? Select from the following options:
+        
 1 - Make a deposit
 2 - Make a withdrawal (\33[31mWARNING: NSF CHARGE OF $10 APPLIES FOR INVALID TRANSACTIONS\33[0m)
 3 - Accumulate monthly interest
@@ -259,5 +265,4 @@ x - Exit to main menu and select another user
             print(f"Exiting {bank[account_choice].full_name}'s account and return to main menu...")
             print()
             user_action_loop = False
-            
             
